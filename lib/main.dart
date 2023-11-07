@@ -15,106 +15,59 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Container(
-        color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Tarefas',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.blue,
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Container(
-                  color: Colors.black,
-                  width: 200,
-                  height: 200,
-                ),
-                Container(
-                  color: Colors.cyan,
-                  width: 100,
-                  height: 100,
-                ),
-              ],
-            ),
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Container(
-                  color: Colors.amber,
-                  width: 200,
-                  height: 200,
-                ),
-                Container(
-                  color: Colors.teal,
-                  width: 100,
-                  height: 100,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  color: Colors.greenAccent,
-                  width: 50,
-                  height: 50,
-                ),
-                Container(
-                  color: Colors.deepOrangeAccent,
-                  width: 50,
-                  height: 50,
-                ),
-                Container(
-                  color: Colors.pinkAccent,
-                  width: 50,
-                  height: 50,
-                ),
-              ],
-            ),
-            Container(
-              color: Colors.orange,
-              width: 300,
-              height: 30,
-              child: Text(
-                'Diamante Amarelo',
-                style: TextStyle(color: Colors.black, fontSize: 28),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            ElevatedButton(onPressed: () {
-              print('Botão apertado!');
-            }, child: Text('Aperte o botão!'))
+            Task('Aprender Flutter'),
+            Task('Andar de Bike'),
+            Task('Viajar'),
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+            onPressed: () {}, backgroundColor: Colors.blue),
       ),
     );
   }
 }
 
-/**
- * Stack(
-    alignment: AlignmentDirectional.center,
-    children: [
-    Container(color: Colors.white, width: 300, height: 300,),
-    Container(color: Colors.cyan,width: 100, height: 100,),
-    ],
-    )
- * Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    mainAxisSize: MainAxisSize.max,
-    children: [
-    Container(color: Colors.white, width: 300, height: 300,),
-    Container(color: Colors.cyan,width: 100, height: 100,),
-    ],
-    )
- *  Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-    Container(color: Colors.white, width: 200, height: 200,),
-    Container(color: Colors.cyan,width: 100, height: 100,),
-    ],
-    )
- */
+class Task extends StatelessWidget {
+  final String nome;
+  const Task(this.nome, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Stack(
+        children: [
+          Container(
+            color: Colors.blue,
+            height: 140,
+          ),
+          Container(
+            color: Colors.white,
+            height: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(color: Colors.black26,
+                  height: 100,
+                  width: 72,),
+                Text(nome),
+                ElevatedButton(onPressed: (){}, child: Icon(Icons.arrow_drop_up))
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
