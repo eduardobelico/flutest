@@ -66,15 +66,14 @@ class MyFirstWidget extends StatelessWidget {
             color: Colors.orange,
             width: 300,
             height: 30,
-            child: Text(
+            child: const Text(
               'Diamante Amarelo',
               style: TextStyle(color: Colors.black, fontSize: 28),
               textAlign: TextAlign.center,
             ),
           ),
           ElevatedButton(onPressed: () {
-            print('Botão apertado!');
-          }, child: Text('Aperte o botão!')),
+          }, child: const Text('Aperte o botão!')),
         ],
       ),
     );

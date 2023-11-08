@@ -1,4 +1,4 @@
-import 'package:flutest/task.dart';
+import 'package:flutest/components/task.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,33 +29,34 @@ class _HomeScreenState extends State<HomeScreen> {
           children: const [
             Task(
               'Aprender Flutter',
-              'https://upload.wikimedia.org/wikipedia/commons/4/4f/Dash%2C_the_mascot_of_the_Dart_programming_language.png',
+              'assets/images/Dash.png',
               3,
             ),
             Task(
                 'Andar de Bike',
-                'https://aventurasnabike.com.br/wp-content/uploads/2022/05/bicicleta-emagrece.jpg',
+                'assets/images/bike.jpg',
                 4),
             Task(
                 'Viajar',
-                'https://i0.statig.com.br/bancodeimagens/ak/k9/vg/akk9vgo89ij6pucqz6uxde7nn.jpg',
+                'assets/images/viajar.jpg',
                 3),
             Task(
                 'Meditar',
-                'https://organicsnewsbrasil.com.br/wp-content/uploads/2016/04/benefícios-da-ioga.jpg',
+                'assets/images/meditar.jpg',
                 2),
             Task(
                 'Ler',
-                'https://vidasimples.co/wp-content/uploads/2019/09/vida-simples-como-ler-mais-abre.jpg',
+                'assets/images/ler.jpg',
                 1),
             Task(
                 'Escrever',
-                'https://www.pressmanager.com.br/wp-content/uploads/2018/06/escrever-bem.png',
+                'assets/images/escrever.png',
                 2),
             Task(
                 'Desenhar',
-                'https://blog.grafittiartes.com.br/wp-content/uploads/2021/01/desenhar-pessoas.jpg',
+                'assets/images/desenhar.jpg',
                 5),
+            SizedBox(height: 68,)
           ],
         ),
       ),
