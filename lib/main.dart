@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool opacidade = true;
 
   @override
   Widget build(BuildContext context) {
@@ -24,41 +31,52 @@ class MyApp extends StatelessWidget {
           ),
           backgroundColor: Colors.blue,
         ),
-        body: ListView(
-          children: [
-            Task(
-              'Aprender Flutter',
-              'https://upload.wikimedia.org/wikipedia/commons/4/4f/Dash%2C_the_mascot_of_the_Dart_programming_language.png',
-              3,
-            ),
-            Task(
-                'Andar de Bike',
-                'https://aventurasnabike.com.br/wp-content/uploads/2022/05/bicicleta-emagrece.jpg',
-                4),
-            Task(
-                'Viajar',
-                'https://i0.statig.com.br/bancodeimagens/ak/k9/vg/akk9vgo89ij6pucqz6uxde7nn.jpg',
-                3),
-            Task(
-                'Meditar',
-                'https://organicsnewsbrasil.com.br/wp-content/uploads/2016/04/benefícios-da-ioga.jpg',
-                2),
-            Task(
-                'Ler',
-                'https://vidasimples.co/wp-content/uploads/2019/09/vida-simples-como-ler-mais-abre.jpg',
-                1),
-            Task(
-                'Escrever',
-                'https://www.pressmanager.com.br/wp-content/uploads/2018/06/escrever-bem.png',
-                2),
-            Task(
-                'Desenhar',
-                'https://blog.grafittiartes.com.br/wp-content/uploads/2021/01/desenhar-pessoas.jpg',
-                5),
-          ],
+        body: AnimatedOpacity(
+          opacity: opacidade ? 1 : 0,
+          duration: const Duration(milliseconds: 800),
+          child: ListView(
+            children: const [
+              Task(
+                'Aprender Flutter',
+                'https://upload.wikimedia.org/wikipedia/commons/4/4f/Dash%2C_the_mascot_of_the_Dart_programming_language.png',
+                3,
+              ),
+              Task(
+                  'Andar de Bike',
+                  'https://aventurasnabike.com.br/wp-content/uploads/2022/05/bicicleta-emagrece.jpg',
+                  4),
+              Task(
+                  'Viajar',
+                  'https://i0.statig.com.br/bancodeimagens/ak/k9/vg/akk9vgo89ij6pucqz6uxde7nn.jpg',
+                  3),
+              Task(
+                  'Meditar',
+                  'https://organicsnewsbrasil.com.br/wp-content/uploads/2016/04/benefícios-da-ioga.jpg',
+                  2),
+              Task(
+                  'Ler',
+                  'https://vidasimples.co/wp-content/uploads/2019/09/vida-simples-como-ler-mais-abre.jpg',
+                  1),
+              Task(
+                  'Escrever',
+                  'https://www.pressmanager.com.br/wp-content/uploads/2018/06/escrever-bem.png',
+                  2),
+              Task(
+                  'Desenhar',
+                  'https://blog.grafittiartes.com.br/wp-content/uploads/2021/01/desenhar-pessoas.jpg',
+                  5),
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
-            onPressed: () {}, backgroundColor: Colors.blue),
+          onPressed: () {
+            setState(() {
+              opacidade = !opacidade;
+            });
+          },
+          backgroundColor: Colors.blue,
+          child: Icon(Icons.remove_red_eye),
+        ),
       ),
     );
   }
@@ -86,24 +104,32 @@ class _TaskState extends State<Task> {
         child: Stack(
           children: [
             Container(
-              color: Colors.blue,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4), color: Colors.blue),
               height: 140,
             ),
             Column(
               children: [
                 Container(
-                  color: Colors.white,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: Colors.white),
                   height: 100,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                          color: Colors.black26,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              color: Colors.black26),
                           height: 100,
                           width: 72,
-                          child: Image.network(
-                            widget.foto,
-                            fit: BoxFit.cover,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(4),
+                            child: Image.network(
+                              widget.foto,
+                              fit: BoxFit.cover,
+                            ),
                           )),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -113,7 +139,7 @@ class _TaskState extends State<Task> {
                               width: 200,
                               child: Text(
                                 widget.nome,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 24,
                                     overflow: TextOverflow.ellipsis),
                               )),
@@ -174,7 +200,7 @@ class _TaskState extends State<Task> {
                               });
                               print(nivel);
                             },
-                            child: Column(
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
