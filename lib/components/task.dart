@@ -6,31 +6,45 @@ class Task extends StatefulWidget {
   final String foto;
   final int dificuldade;
 
-  const Task(this.nome, this.foto, this.dificuldade, {super.key});
+  Task(this.nome, this.foto, this.dificuldade, {super.key});
+
+  int nivel = 0;
+  int constantNivel = 0;
 
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  int nivel = 0;
-  int constantNivel = 0;
+
   bool levelMax = false;
 
-  maestryColor(){
-    if(constantNivel >= widget.dificuldade * 10 && constantNivel < widget.dificuldade * 20){
+  bool assetOrNetwork() {
+    if (widget.foto.contains('http')) {
+      return false;
+    }
+    return true;
+  }
+
+  maestryColor() {
+    if (widget.constantNivel >= widget.dificuldade * 10 &&
+        widget.constantNivel < widget.dificuldade * 20) {
       return Colors.green;
-    } else if(constantNivel >= widget.dificuldade * 20 && constantNivel < widget.dificuldade * 30){
+    } else if (widget.constantNivel >= widget.dificuldade * 20 &&
+        widget.constantNivel < widget.dificuldade * 30) {
       return Colors.amberAccent;
-    }else if(constantNivel >= widget.dificuldade * 30 && constantNivel < widget.dificuldade * 40){
+    } else if (widget.constantNivel >= widget.dificuldade * 30 &&
+        widget.constantNivel < widget.dificuldade * 40) {
       return Colors.orange;
-    }else if(constantNivel >= widget.dificuldade * 40 && constantNivel < widget.dificuldade * 50){
+    } else if (widget.constantNivel >= widget.dificuldade * 40 &&
+        widget.constantNivel < widget.dificuldade * 50) {
       return Colors.red;
-    }else if(constantNivel >= widget.dificuldade * 50 && constantNivel < widget.dificuldade * 60){
+    } else if (widget.constantNivel >= widget.dificuldade * 50 &&
+        widget.constantNivel < widget.dificuldade * 60) {
       return Colors.purple;
-    }else if(constantNivel >= widget.dificuldade * 60){
+    } else if (widget.constantNivel >= widget.dificuldade * 60) {
       return Colors.black;
-    }else {
+    } else {
       return Colors.blueGrey;
     }
   }
@@ -63,12 +77,16 @@ class _TaskState extends State<Task> {
                         height: 100,
                         width: 72,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: Image.asset(
-                            widget.foto,
-                            fit: BoxFit.cover,
-                          ),
-                        )),
+                            borderRadius: BorderRadius.circular(4),
+                            child: assetOrNetwork()
+                                ? Image.asset(
+                                    widget.foto,
+                                    fit: BoxFit.cover,
+                                  )
+                                : Image.network(
+                                    widget.foto,
+                                    fit: BoxFit.cover,
+                                  ))),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,11 +116,12 @@ class _TaskState extends State<Task> {
                               )),
                           onPressed: () {
                             setState(() {
-                              nivel++;
-                              constantNivel++;
-                              if(nivel == widget.dificuldade * 10){
-                                nivel = 0;
-                              }else if(constantNivel >= widget.dificuldade * 60){
+                              widget.nivel++;
+                              widget.constantNivel++;
+                              if (widget.nivel == widget.dificuldade * 10) {
+                                widget.nivel = 0;
+                              } else if (widget.constantNivel >=
+                                  widget.dificuldade * 60) {
                                 levelMax = true;
                               }
                             });
@@ -136,14 +155,15 @@ class _TaskState extends State<Task> {
                         child: LinearProgressIndicator(
                           color: Colors.white,
                           value: (widget.dificuldade > 0)
-                              ? (nivel / widget.dificuldade) / 15
+                              ? (widget.nivel / widget.dificuldade) / 15
                               : 1,
                         )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8),
-                    child: Text('Nível: $nivel',
-                        style: const TextStyle(color: Colors.white, fontSize: 16)),
+                    child: Text('Nível: ${widget.nivel}',
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 16)),
                   ),
                 ],
               ),
