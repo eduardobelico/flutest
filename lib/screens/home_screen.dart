@@ -1,4 +1,5 @@
 import 'package:flutest/components/task.dart';
+import 'package:flutest/screens/form_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,8 +10,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool opacidade = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,52 +21,35 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: Colors.blue,
       ),
-      body: AnimatedOpacity(
-        opacity: opacidade ? 1 : 0,
-        duration: const Duration(milliseconds: 800),
-        child: ListView(
-          children: const [
-            Task(
-              'Aprender Flutter',
-              'assets/images/Dash.png',
-              3,
-            ),
-            Task(
-                'Andar de Bike',
-                'assets/images/bike.jpg',
-                4),
-            Task(
-                'Viajar',
-                'assets/images/viajar.jpg',
-                3),
-            Task(
-                'Meditar',
-                'assets/images/meditar.jpg',
-                2),
-            Task(
-                'Ler',
-                'assets/images/ler.jpg',
-                1),
-            Task(
-                'Escrever',
-                'assets/images/escrever.png',
-                2),
-            Task(
-                'Desenhar',
-                'assets/images/desenhar.jpg',
-                5),
-            SizedBox(height: 68,)
-          ],
-        ),
+      body: ListView(
+        children: const [
+          Task(
+            'Aprender Flutter',
+            'assets/images/Dash.png',
+            3,
+          ),
+          Task('Andar de Bike', 'assets/images/bike.jpg', 4),
+          Task('Viajar', 'assets/images/viajar.jpg', 3),
+          Task('Meditar', 'assets/images/meditar.jpg', 2),
+          Task('Ler', 'assets/images/ler.jpg', 1),
+          Task('Escrever', 'assets/images/escrever.png', 2),
+          Task('Desenhar', 'assets/images/desenhar.jpg', 5),
+          SizedBox(
+            height: 68,
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            opacidade = !opacidade;
-          });
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FormScreen(),
+            ),
+          );
         },
         backgroundColor: Colors.blue,
-        child: const Icon(Icons.remove_red_eye),
+        child: const Icon(Icons.add),
       ),
     );
   }

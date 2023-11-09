@@ -56,7 +56,8 @@ class _FormScreenState extends State<FormScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       validator: (value) {
-                        if (value!.isEmpty || int.parse(value) > 5 ||
+                        if (value!.isEmpty ||
+                            int.parse(value) > 5 ||
                             int.parse(value) < 1) {
                           return 'Insira uma Dificuldade entre 1 e 5';
                         }
@@ -120,8 +121,11 @@ class _FormScreenState extends State<FormScreen> {
                         print(difficultyController.text);
                         print(imageController.text);
                         ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text(
-                                'Nova Tarefa salva!'),),);
+                          const SnackBar(
+                            content: Text('Nova Tarefa salva!'),
+                          ),
+                        );
+                        Navigator.pop(context);
                       }
                     },
                     child: Text('Adicionar'),
